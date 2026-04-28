@@ -1,3 +1,59 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: "Aptos Display", "Trebuchet MS", "Gill Sans", sans-serif;
+  background: #07110d;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), transparent 28rem),
+    radial-gradient(circle at 85% 10%, rgba(45, 212, 191, 0.12), transparent 24rem),
+    linear-gradient(145deg, #07110d 0%, #0d1712 45%, #050807 100%);
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply border border-white/10 bg-white/[0.07] shadow-2xl shadow-black/25 backdrop-blur-xl;
+  }
+
+  .soft-ring {
+    @apply ring-1 ring-white/10 transition duration-300;
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.55s ease both;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.28s ease both;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

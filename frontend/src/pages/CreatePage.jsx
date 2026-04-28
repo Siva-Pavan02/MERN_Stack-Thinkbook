@@ -1,8 +1,9 @@
-import { ArrowLeftIcon } from "lucide-react";
+import { ArrowLeftIcon, FilePenLineIcon, SparklesIcon } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import api from "../lib/axios";
+import { isLoggedIn } from "../lib/auth";
 
 const CreatePage = () => {
   const [title, setTitle] = useState("");
@@ -10,6 +11,10 @@ const CreatePage = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  if (!isLoggedIn()) {
+    return <Navigate to="/" replace />;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,50 +49,72 @@ const CreatePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-200">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-2xl mx-auto">
-          <Link to={"/"} className="btn btn-ghost mb-6">
+    <div className="min-h-screen px-4 py-8 sm:px-6">
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-6 flex items-center justify-between">
+          <Link
+            to={"/"}
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-slate-200 transition hover:-translate-x-0.5 hover:bg-white/10 active:scale-95"
+          >
             <ArrowLeftIcon className="size-5" />
             Back to Notes
           </Link>
+        </div>
 
-          <div className="card bg-base-100">
-            <div className="card-body">
-              <h2 className="card-title text-2xl mb-4">Create New Note</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="form-control mb-4">
-                  <label className="label">
-                    <span className="label-text">Title</span>
-                  </label>
+        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.4fr]">
+          <aside className="glass-panel animate-fade-up rounded-[2rem] p-7">
+            <div className="mb-6 grid size-14 place-items-center rounded-3xl bg-emerald-300 text-slate-950 shadow-lg shadow-emerald-500/20">
+              <SparklesIcon className="size-6" />
+            </div>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-emerald-100/80">
+              Capture mode
+            </p>
+            <h1 className="mt-3 text-4xl font-black tracking-tight text-white">Create a note</h1>
+            <p className="mt-4 leading-7 text-slate-300">
+              Keep it quick or go deep. Your note will be stored privately in your workspace.
+            </p>
+          </aside>
+
+          <div className="glass-panel animate-scale-in rounded-[2rem] p-6 sm:p-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="mb-2 block text-sm font-bold text-slate-200">Title</label>
                   <input
                     type="text"
                     placeholder="Note Title"
-                    className="input input-bordered"
+                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-lg font-bold text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-200/40 focus:bg-white/10"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                   />
-                </div>
+              </div>
 
-                <div className="form-control mb-4">
-                  <label className="label">
-                    <span className="label-text">Content</span>
-                  </label>
+              <div>
+                <label className="mb-2 block text-sm font-bold text-slate-200">Content</label>
                   <textarea
                     placeholder="Write your note here..."
-                    className="textarea textarea-bordered h-32"
+                    className="min-h-64 w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-base leading-7 text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-emerald-200/40 focus:bg-white/10"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                   />
-                </div>
+              </div>
 
-                <div className="card-actions justify-end">
-                  <button type="submit" className="btn btn-primary" disabled={loading}>
-                    {loading ? "Creating..." : "Create Note"}
-                  </button>
-                </div>
-              </form>
-            </div>
+              <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
+                <Link
+                  to="/"
+                  className="rounded-full px-5 py-3 text-center text-sm font-bold text-slate-300 transition hover:bg-white/10"
+                >
+                  Cancel
+                </Link>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3 font-bold text-slate-950 shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
+                  disabled={loading}
+                >
+                  <FilePenLineIcon className="size-5" />
+                  {loading ? "Creating..." : "Create Note"}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
