@@ -1,5 +1,5 @@
 import { NotebookIcon, SearchXIcon } from "lucide-react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const NotesNotFound = ({ isSearching = false, query = "" }) => {
   return (

@@ -1,8 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const DEFAULT_CREDENTIALS_FILE =
-  "client_secret_435475552158-9uu8om191v5tj5l6ce1a27ipctm5ooo9.apps.googleusercontent.com.json";
+const DEFAULT_CREDENTIALS_FILE = "client_secret.json";
 
 export function getGoogleCredentials() {
   if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
@@ -15,6 +14,12 @@ export function getGoogleCredentials() {
   const credentialsPath =
     process.env.GOOGLE_CREDENTIALS_PATH ||
     path.resolve(process.cwd(), "..", DEFAULT_CREDENTIALS_FILE);
+
+  if (!fs.existsSync(credentialsPath)) {
+    throw new Error(
+      "Google OAuth credentials not found. Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in your environment, or set GOOGLE_CREDENTIALS_PATH to a local credentials JSON file."
+    );
+  }
 
   const credentials = JSON.parse(fs.readFileSync(credentialsPath, "utf8"));
   const oauthClient = credentials.web || credentials.installed;

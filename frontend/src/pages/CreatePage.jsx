@@ -1,7 +1,7 @@
 import { ArrowLeftIcon, FilePenLineIcon, SparklesIcon } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Link, Navigate, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import api from "../lib/axios";
 import { isLoggedIn } from "../lib/auth";
 
