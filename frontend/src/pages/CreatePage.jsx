@@ -79,23 +79,23 @@ const CreatePage = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="mb-2 block text-sm font-bold text-slate-200">Title</label>
-                  <input
-                    type="text"
-                    placeholder="Note Title"
-                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-lg font-bold text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-200/40 focus:bg-white/10"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
+                <input
+                  type="text"
+                  placeholder="Note Title"
+                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-lg font-bold text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-200/40 focus:bg-white/10"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
               </div>
 
               <div>
                 <label className="mb-2 block text-sm font-bold text-slate-200">Content</label>
-                  <textarea
-                    placeholder="Write your note here..."
-                    className="min-h-64 w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-base leading-7 text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-emerald-200/40 focus:bg-white/10"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                  />
+                <textarea
+                  placeholder="Write your note here..."
+                  className="min-h-64 w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-base leading-7 text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-emerald-200/40 focus:bg-white/10"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                />
               </div>
 
               <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">

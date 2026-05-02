@@ -1,7 +1,7 @@
-import "dotenv/config";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
+import "./env.js";
 import { getGoogleCredentials } from "./googleCredentials.js";
 import User from "../models/User.js";
 
@@ -12,8 +12,8 @@ passport.use(
     {
       clientID,
       clientSecret,
-      callbackURL:
-        process.env.GOOGLE_CALLBACK_URL || "http://localhost:5001/api/auth/google/callback",
+      callbackURL: process.env.GOOGLE_CALLBACK_URL || "/auth/google/callback",
+      proxy: true,
     },
     async (_, __, profile, done) => {
       try {

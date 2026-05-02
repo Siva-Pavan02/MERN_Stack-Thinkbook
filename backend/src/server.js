@@ -1,19 +1,23 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
+import "./config/env.js";
 import notesRoutes from "./routes/notesRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import { connectDB } from "./config/db.js";
 import rateLimiter from "./middleware/rateLimiter.js";
 import passport from "./config/passport.js";
 
-dotenv.config();
-
 const app = express();
-const PORT = process.env.PORT || 5001;
-const __dirname = path.resolve();
+const PORT = process.env.PORT || 5000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendDistPath = path.resolve(__dirname, "../../frontend/dist");
+
+app.set("trust proxy", 1);
 
 // middleware
 if (process.env.NODE_ENV !== "production") {
@@ -27,21 +31,23 @@ app.use(express.json()); // this middleware will parse JSON bodies: req.body
 app.use(passport.initialize());
 app.use(rateLimiter);
 
-// our simple custom middleware
-// app.use((req, res, next) => {
-//   console.log(`Req method is ${req.method} & Req URL is ${req.url}`);
-//   next();
-// });
+
 
 app.use("/api/auth", authRoutes);
 app.use("/auth", authRoutes);
 app.use("/api/notes", notesRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+if (fs.existsSync(frontendDistPath)) {
+  app.use(express.static(frontendDistPath));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+    res.sendFile(path.join(frontendDistPath, "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res
+      .status(503)
+      .send("Frontend build not found. Run `npm run build` before starting the server.");
   });
 }
 

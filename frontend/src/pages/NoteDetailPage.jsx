@@ -93,17 +93,17 @@ const NoteDetailPage = () => {
             to="/"
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-slate-200 transition hover:-translate-x-0.5 hover:bg-white/10 active:scale-95"
           >
-              <ArrowLeftIcon className="h-5 w-5" />
-              Back to Notes
-            </Link>
-            <button
-              onClick={handleDelete}
-              className="inline-flex items-center gap-2 rounded-full border border-rose-300/20 bg-rose-400/10 px-4 py-2.5 text-sm font-bold text-rose-100 transition hover:-translate-y-0.5 hover:bg-rose-400/20 active:scale-95"
-            >
-              <Trash2Icon className="h-5 w-5" />
-              <span className="hidden sm:inline">Delete Note</span>
-            </button>
-          </div>
+            <ArrowLeftIcon className="h-5 w-5" />
+            Back to Notes
+          </Link>
+          <button
+            onClick={handleDelete}
+            className="inline-flex items-center gap-2 rounded-full border border-rose-300/20 bg-rose-400/10 px-4 py-2.5 text-sm font-bold text-rose-100 transition hover:-translate-y-0.5 hover:bg-rose-400/20 active:scale-95"
+          >
+            <Trash2Icon className="h-5 w-5" />
+            <span className="hidden sm:inline">Delete Note</span>
+          </button>
+        </div>
 
         <div className="glass-panel animate-scale-in rounded-[2rem] p-6 sm:p-8">
           <div className="mb-8">
@@ -116,37 +116,37 @@ const NoteDetailPage = () => {
           </div>
 
           <div className="space-y-6">
-              <div>
-                <label className="mb-2 block text-sm font-bold text-slate-200">Title</label>
-                <input
-                  type="text"
-                  placeholder="Note title"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-lg font-bold text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-200/40 focus:bg-white/10"
-                  value={note.title}
-                  onChange={(e) => setNote({ ...note, title: e.target.value })}
-                />
-              </div>
+            <div>
+              <label className="mb-2 block text-sm font-bold text-slate-200">Title</label>
+              <input
+                type="text"
+                placeholder="Note title"
+                className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-lg font-bold text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-200/40 focus:bg-white/10"
+                value={note.title}
+                onChange={(e) => setNote({ ...note, title: e.target.value })}
+              />
+            </div>
 
-              <div>
-                <label className="mb-2 block text-sm font-bold text-slate-200">Content</label>
-                <textarea
-                  placeholder="Write your note here..."
-                  className="min-h-72 w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-base leading-7 text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-emerald-200/40 focus:bg-white/10"
-                  value={note.content}
-                  onChange={(e) => setNote({ ...note, content: e.target.value })}
-                />
-              </div>
+            <div>
+              <label className="mb-2 block text-sm font-bold text-slate-200">Content</label>
+              <textarea
+                placeholder="Write your note here..."
+                className="min-h-72 w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-base leading-7 text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-emerald-200/40 focus:bg-white/10"
+                value={note.content}
+                onChange={(e) => setNote({ ...note, content: e.target.value })}
+              />
+            </div>
 
-              <div className="flex justify-end">
-                <button
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3 font-bold text-slate-950 shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
-                  disabled={saving}
-                  onClick={handleSave}
-                >
-                  <SaveIcon className="size-5" />
-                  {saving ? "Saving..." : "Save Changes"}
-                </button>
-              </div>
+            <div className="flex justify-end">
+              <button
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3 font-bold text-slate-950 shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={saving}
+                onClick={handleSave}
+              >
+                <SaveIcon className="size-5" />
+                {saving ? "Saving..." : "Save Changes"}
+              </button>
+            </div>
           </div>
         </div>
       </div>

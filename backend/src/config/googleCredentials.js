@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 
+import "./env.js";
+
 const DEFAULT_CREDENTIALS_FILE = "client_secret.json";
 
 export function getGoogleCredentials() {

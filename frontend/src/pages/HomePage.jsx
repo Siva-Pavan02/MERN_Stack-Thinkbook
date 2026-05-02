@@ -90,18 +90,16 @@ const HomePage = () => {
             <div className="glass-panel flex rounded-2xl p-1">
               <button
                 onClick={() => setView("grid")}
-                className={`grid size-10 place-items-center rounded-xl transition ${
-                  view === "grid" ? "bg-emerald-300 text-slate-950" : "text-slate-300 hover:bg-white/10"
-                }`}
+                className={`grid size-10 place-items-center rounded-xl transition ${view === "grid" ? "bg-emerald-300 text-slate-950" : "text-slate-300 hover:bg-white/10"
+                  }`}
                 aria-label="Grid view"
               >
                 <Grid2X2Icon className="size-5" />
               </button>
               <button
                 onClick={() => setView("list")}
-                className={`grid size-10 place-items-center rounded-xl transition ${
-                  view === "list" ? "bg-emerald-300 text-slate-950" : "text-slate-300 hover:bg-white/10"
-                }`}
+                className={`grid size-10 place-items-center rounded-xl transition ${view === "list" ? "bg-emerald-300 text-slate-950" : "text-slate-300 hover:bg-white/10"
+                  }`}
                 aria-label="List view"
               >
                 <LayoutListIcon className="size-5" />

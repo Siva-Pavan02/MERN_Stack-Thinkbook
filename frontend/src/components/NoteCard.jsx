@@ -23,9 +23,8 @@ const NoteCard = ({ note, setNotes, view = "grid" }) => {
   return (
     <Link
       to={`/note/${note._id}`}
-      className={`group glass-panel soft-ring animate-fade-up relative overflow-hidden rounded-[2rem] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/30 hover:bg-white/[0.1] hover:shadow-emerald-950/40 ${
-        view === "list" ? "block" : "min-h-64"
-      }`}
+      className={`group glass-panel soft-ring animate-fade-up relative overflow-hidden rounded-[2rem] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/30 hover:bg-white/[0.1] hover:shadow-emerald-950/40 ${view === "list" ? "block" : "min-h-64"
+        }`}
     >
       <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-300 via-teal-200 to-lime-200 opacity-80" />
       <div className="absolute -right-14 -top-14 size-32 rounded-full bg-emerald-300/10 blur-2xl transition group-hover:bg-emerald-300/20" />
@@ -41,9 +40,8 @@ const NoteCard = ({ note, setNotes, view = "grid" }) => {
         </div>
 
         <div
-          className={`flex items-center justify-between gap-4 ${
-            view === "list" ? "shrink-0 sm:min-w-56 sm:justify-end" : "mt-8"
-          }`}
+          className={`flex items-center justify-between gap-4 ${view === "list" ? "shrink-0 sm:min-w-56 sm:justify-end" : "mt-8"
+            }`}
         >
           <span className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-400">
             <CalendarDaysIcon className="size-3.5" />
