@@ -24,7 +24,7 @@ passport.use(
         }
 
         const user = await User.findOneAndUpdate(
-          { googleId: profile.id },
+          { email },
           {
             googleId: profile.id,
             name: profile.displayName,

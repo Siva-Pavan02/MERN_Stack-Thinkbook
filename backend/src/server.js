@@ -51,6 +51,16 @@ if (fs.existsSync(frontendDistPath)) {
   });
 }
 
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.error("Global error handler caught:", err);
+  res.status(500).json({
+    error: "Internal Server Error",
+    message: err.message,
+    ...(process.env.NODE_ENV !== "production" && { stack: err.stack }),
+  });
+});
+
 connectDB().then(() => {
   const server = app.listen(PORT, () => {
     const startedPort = server.address && server.address().port;

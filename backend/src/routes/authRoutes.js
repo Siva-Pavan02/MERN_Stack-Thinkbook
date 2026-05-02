@@ -20,18 +20,28 @@ router.get(
     session: false,
   }),
   (req, res) => {
-    const token = jwt.sign(
-      {
-        id: req.user._id,
-        name: req.user.name,
-        email: req.user.email,
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    try {
+      if (!process.env.JWT_SECRET) {
+        console.error("JWT_SECRET is not defined in environment variables");
+        return res.status(500).json({ error: "Server configuration error: JWT_SECRET missing" });
+      }
 
-    const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
-    res.redirect(`${clientUrl}/auth/success?token=${token}`);
+      const token = jwt.sign(
+        {
+          id: req.user._id,
+          name: req.user.name,
+          email: req.user.email,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "7d" }
+      );
+
+      const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
+      res.redirect(`${clientUrl}/auth/success?token=${token}`);
+    } catch (error) {
+      console.error("Error generating JWT:", error);
+      res.status(500).json({ error: "Failed to generate authentication token", details: error.message });
+    }
   }
 );
 
